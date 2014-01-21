@@ -19,9 +19,12 @@ function connect($config){
  * @return array
  */
 function getById($id,$collection,$dbname){
-
+	// Convert strings of right length to MongoID
+	if (strlen($id) == 24){
+		$id = new \MongoId($id);
+	}
 	$table = $dbname->selectCollection($collection);
-	$cursor  = $table->find(array('_id' => new \MongoId($id)));
+	$cursor  = $table->find(array('_id' => $id));
 	$article = $cursor->getNext();
 
 	if (!$article ){
@@ -55,6 +58,23 @@ function get($page,$collection,$dbname){
 	$data=array($currentPage,$totalPages,$cursor);
 
 	return $data;
+}
+/**
+ * delete article via id
+ * @return 
+ */
+function delete($id,$collection,$dbname){
+	// Convert strings of right length to MongoID
+	if (strlen($id) == 24){
+		$id = new \MongoId($id);
+	}
+	$table 	 = $dbname->selectCollection($collection);
+	$result = $table->remove(array('_id'=>$id));
+	if (!$id){
+		return false;
+	}
+	return $result;
+
 }
 function commentId($id,$collection,$dbname)
 {

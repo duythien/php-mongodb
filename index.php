@@ -6,14 +6,6 @@ require 'app.php';
 use Blog\Functions;
 
 try {
-	
-	// Fetch all the posts
-	/*$posts = Functions\get('posts', $conn);
-
-	view('index', array(
-		'cursor' => $posts,
-		'name' => 'Duy Thien'
-	));*/
 	$currentPage = (isset($_GET['page'])) ? (int) $_GET['page'] : 1; //current page number
         $data = Functions\get($currentPage,'posts',$conn);
        

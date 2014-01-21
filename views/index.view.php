@@ -29,6 +29,8 @@
             <?php endif; ?>
 
           </li>
+                    <li lass="page-number"> <?php echo $currentPage; ?> </li>
+
           <li>
             <?php if($currentPage !== $totalPages): ?>
                 <a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($currentPage + 1); ?>">Newer &rarr;</a>

@@ -37,10 +37,17 @@
     <div class="span12">
         <ul class="pager">
           <li>
+            <?php if($currentPage !== 1): ?>
                 <a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($currentPage - 1); ?>">&larr; Older</a>
+            <?php endif; ?>
+
           </li>
+                    <li lass="page-number"> <?php echo $currentPage; ?> </li>
+
           <li>
+            <?php if($currentPage !== $totalPages): ?>
                 <a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($currentPage + 1); ?>">Newer &rarr;</a>
+            <?php endif;?>
         </li>
         </ul>
     </div>

@@ -22,9 +22,7 @@
 			<label for="content">Content</label>
 				<p><textarea name="content" id="content" cols="40" rows="8" class="span10"></textarea></p>
 			
-			<div class="submit"><input type="submit" name="btn_submit" value="Save"/></div>
-
-		
+			<div class="submit"><input type="submit" name="btn_submit" value="Save"/></div>	
 	</form>
 	
 
