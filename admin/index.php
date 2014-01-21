@@ -61,7 +61,6 @@ if (is_array($_SESSION) &&$_SESSION['username'] ==UserAuth) {
             'article' => Blog\Functions\getById($id,'posts',$conn),
             'status'  => $data['status']
         ));
-
     }
     else{
         $currentPage = (isset($_GET['page'])) ? (int) $_GET['page'] : 1; //current page number
@@ -74,6 +73,5 @@ if (is_array($_SESSION) &&$_SESSION['username'] ==UserAuth) {
             'cursor'       => $data[2],
 
         ));
-
     }   
 }

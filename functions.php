@@ -1,8 +1,7 @@
 <?php namespace Blog\Functions;
 
 
-function connect($config)
-{
+function connect($config){
 	try{
 		if ( !class_exists('Mongo')){
             echo ("The MongoDB PECL extension has not been installed or enabled");
@@ -15,19 +14,12 @@ function connect($config)
 		return false;
 	}
 }
+/**
+ * get one article by id
+ * @return array
+ */
+function getById($id,$collection,$dbname){
 
-
-/*function get($collection,$dbname)
-{
-	$table = $dbname->selectCollection($collection);
-	//$table = $dbname->$collection;
-	$stmt  = $table->find();
-
-	return ($stmt->count() > 0) ? $stmt : false;
-}*/
-             
-function getById($id,$collection,$dbname)
-{
 	$table = $dbname->selectCollection($collection);
 	$cursor  = $table->find(array('_id' => new \MongoId($id)));
 	$article = $cursor->getNext();
@@ -37,8 +29,12 @@ function getById($id,$collection,$dbname)
 	}
 	return $article;
 }
-function get($page,$collection,$dbname)
-{
+/**
+ * get all data in collection and paginator
+ *
+ * @return multi array 
+ */
+function get($page,$collection,$dbname){
 
 	$currentPage = $page;
 	$articlesPerPage = 5;
