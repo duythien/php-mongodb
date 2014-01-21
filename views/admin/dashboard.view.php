@@ -15,7 +15,7 @@
             $article = $cursor->getNext();?>
             <tr>
                 <td><?php echo substr($article['title'], 0, 35) . '...'; ?></td>
-                <td><?php print date('g:i a, F j', $article['saved_at']->sec);?></td>
+                <td><?php print date('M d/Y H:i', $article['saved_at']->sec);?></td>
                 <td width="9%">
                      <a href="../single.php?id=<?php echo $article['_id'];?>">View</a>
                 </td>
@@ -51,7 +51,7 @@
             var deleteArticle = confirm('Are you sure you want to delete this article?');
 
             if(deleteArticle){
-                window.location.href = 'delete.php?id='+articleId;
+                window.location.href = 'index.php?status=delete&id='+articleId;
             }
             return;
         }
