@@ -1,10 +1,13 @@
 <?php
 include 'config.php';
 include 'layout.php';
-include 'functions.php';
+include 'db.php';
 
-use Blog\Functions;
+use Blog\DB,
+	Blog\Layout;
 
-// Connect to the db
-$conn = Functions\connect($config);
-if ( !$conn ) die('Problem connecting to the database see file config.php.');
+// Constructor to the db
+$db = new DB\DB($config);
+
+// Constructor to layout view
+$layout = new Layout\Layout();

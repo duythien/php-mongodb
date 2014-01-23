@@ -3,14 +3,12 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require 'app.php';
-use Blog\Functions;
-
 try {
 	$currentPage = (isset($_GET['page'])) ? (int) $_GET['page'] : 1; //current page number
-        $data = Functions\get($currentPage,'posts',$conn);
+         $data = $db->get($currentPage,'posts');
        
 
-        view('index',array(
+        $layout->view('index',array(
             'currentPage'  => $data[0],
             'totalPages'   => $data[1],
             'cursor'       => $data[2],

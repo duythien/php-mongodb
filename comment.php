@@ -1,28 +1,21 @@
 <?php
 
 require 'app.php';
-use Blog\Functions;
 
-$id = $_POST['article_id'];
-$postCollection = $conn->posts;
-$post = $postCollection->findOne(array('_id' => new MongoId($id)));
+if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
-if (isset($post['comments'])) {
-	$comments = $post['comments'];
-}else{
-	$comments = array();
+	$id = $_POST['article_id'];
+	$comment = array(
+              	'name' => $_POST['fName'], 
+                'email' => $_POST['fEmail'],
+                'comment' => $_POST['fComment'],
+                'posted_at' => new MongoDate()
+	);
+	$status = $db->commentId($id,'posts',$comment);
+
+	if ($status == TRUE) {
+		header('Location: single.php?id='.$id);
+	}
+		
+
 }
-
-$comment = array(
-                  	'name' => $_POST['fName'], 
-                    'email' => $_POST['fEmail'],
-                    'comment' => $_POST['fComment'],
-                    'posted_at' => new MongoDate()
-                );
-                
-array_push($comments, $comment);
-
-$postCollection->update(
-						array('_id' => new MongoId($id)), 
-						array('$set' => array('comments' => $comments)));
-header('Location: single.php?id='.$id);

@@ -1,13 +1,15 @@
 <?php
 
 require 'app.php';
-use Blog\Functions;
+
 // Fetch all the posts
-$post = Functions\getById($_GET['id'],'posts',$conn);
-if ( $post ) {	
-	view('single', array(
+$post = $db->getById($_GET['id'],'posts');
+if ($post == FALSE) {	
+	header('Location: index.php');
+	
+} else {
+	
+	$layout->view('single', array(
 		'article' => $post
 	));
-} else {
-	//header('location:/');
 }
