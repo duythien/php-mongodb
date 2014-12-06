@@ -25,7 +25,7 @@ class DB {
 	            echo ("The MongoDB PECL extension has not been installed or enabled");
 	            return false;
 	        }
-			$connection=  new \Mongo($config['connection_string'],array('username'=>$config['username'],'password'=>$config['password']));
+			$connection=  new \MongoClient($config['connection_string'],array('username'=>$config['username'],'password'=>$config['password']));
 	    	return $this->db = $connection->selectDB($config['dbname']);
 		}catch(Exception $e) {
 			return false;
