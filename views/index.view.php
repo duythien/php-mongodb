@@ -2,7 +2,7 @@
 <a id="blog-image" href="http://theaqua.im">
     <img class="text-center" alt="Duy Thien" src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/01/thien_tranduy-96x96.png">
 </a>
- <h2 class="text-center" >Here are some articles I've written:</h2> 
+ <h2 class="text-center" >Here are some articles I've written:</h2>
 
 </div>
 <div class="span2"></div>
@@ -13,7 +13,7 @@
     <h2><?php echo $article['title']; ?></h2>
     <span class="date"><?php echo date('M d/Y H:i',$article['saved_at']->sec); ?> post By <?php echo $name;?></span>
 
-    <p><?php echo substr($article['content'], 0, 200);?></p>
+    <p><?php echo substr($article['html'], 0, 200);?></p>
     <a href="single.php?id=<?php echo $article['_id']; ?>">Read more</a>
   <?php endwhile; ?>
   </div>

@@ -4,7 +4,7 @@
   <div class="span8">
       <div class="content">
        <h1 class="text-center" ><?php echo $article['title']; ?></h1></br><hr>
-        <p><?php echo $article['content']; ?> <p>
+        <p><?php echo $article['html']; ?> <p>
       </div>
   </div><!-- span8-->
 <div class="span2"></div>
@@ -29,7 +29,7 @@
                 <?php endforeach;
             endif;?>
 
-          <h3>Post your comment</h3>                   
+          <h3>Post your comment</h3>
           <form method="post" action="comment.php">
               <div><label for="fName">Name</label>
                   <input type="text" name="fName" id="fName" required="required" />
@@ -37,7 +37,7 @@
               <div><label for="fEmail">Email address</label>
                 <input type="email" name="fEmail" id="fEmail" required="required" placeholder="name@example.com" />
               </div>
-              
+
               <div><label for="fQuestion">Question/Comments</label>
                 <textarea name="fComment" cols="40" rows="8" class="span8 wmd-input"></textarea>
               </div>
@@ -45,5 +45,5 @@
               <div class="submit"><input type="submit" name="contact-submit" id="contact-submit" value="Submit" /></div>
           </form>
       </div>
-    
+
 </div>

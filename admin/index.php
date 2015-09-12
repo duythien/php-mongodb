@@ -4,7 +4,7 @@ require_once '../app.php';
 require_once '../vendor/markdown/Markdown.inc.php';
 
 use Michelf\MarkdownExtra,
-    Michelf\Markdown;   
+    Michelf\Markdown;
 
 $url_action = (empty($_REQUEST['action'])) ? 'logIn' : $_REQUEST['action'];
 
@@ -27,10 +27,11 @@ if (is_array($_SESSION) &&$_SESSION['username'] ==UserAuth) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
                 $article               = array();
                 $article['title']      = $_POST['title'];
-                $article['content']    = Markdown::defaultTransform($_POST['content']);
-            
+                $article['html']    = Markdown::defaultTransform($_POST['content']);
+				$article['content']    =$_POST['content'];
+
                 $article['saved_at'] = new MongoDate();
-                
+
                 if ( empty($article['title']) || empty($article['content']) ) {
                     $data['status'] = 'Please fill out both inputs.';
                 }else {
@@ -39,7 +40,7 @@ if (is_array($_SESSION) &&$_SESSION['username'] ==UserAuth) {
                     $data['status'] = 'Row has successfully been inserted.';
                 }
             }
-            $layout->view('admin/create', $data); 
+            $layout->view('admin/create', $data);
             break;
         case 'edit':
             $id   = $_REQUEST['id'];
@@ -49,9 +50,10 @@ if (is_array($_SESSION) &&$_SESSION['username'] ==UserAuth) {
 
                 $article               = array();
                 $article['title']      = $_POST['title'];
-                $article['content']    = Markdown::defaultTransform($_POST['content']);
+                $article['html']    = Markdown::defaultTransform($_POST['content']);
+                $article['content']    =$_POST['content'];
                 $article['saved_at'] = new MongoDate();
-                
+
                 if ( empty($article['title']) || empty($article['content']) ) {
                     $data['status'] = 'Please fill out both inputs.';
                 }else {
@@ -59,12 +61,12 @@ if (is_array($_SESSION) &&$_SESSION['username'] ==UserAuth) {
                     $db->update($id,'posts',$article);
                     $data['status'] = 'Row has successfully been update.';
                 }
-            }            
+            }
            $layout->view('admin/edit',array(
                 'article' => $db->getById($id,'posts'),
                 'status'  => $data['status']
-            )); 
-            break; 
+            ));
+            break;
         case 'delete':
             $id = $_GET['id'];
             $status = $db->delete($id,'posts');
@@ -75,7 +77,7 @@ if (is_array($_SESSION) &&$_SESSION['username'] ==UserAuth) {
         default:
             $currentPage = (isset($_GET['page'])) ? (int) $_GET['page'] : 1; //current page number
             $data = $db->get($currentPage,'posts');
-       
+
 
             $layout->view('admin/dashboard',array(
                 'currentPage'  => $data[0],
@@ -86,4 +88,3 @@ if (is_array($_SESSION) &&$_SESSION['username'] ==UserAuth) {
         break;
     }
 }
-   
